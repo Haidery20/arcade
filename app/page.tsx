@@ -204,7 +204,7 @@ export default function QRLandingPage() {
           </Card>
         </div>
 
-        <div className="mt-16 max-w-2xl mx-auto">
+        {/* <div className="mt-16 max-w-2xl mx-auto">
           <Card className="p-8 space-y-6 text-center bg-primary text-primary-foreground">
             <h3 className="text-2xl md:text-3xl font-bold text-balance">
               Join the financial revolution for African SMEs
@@ -224,7 +224,7 @@ export default function QRLandingPage() {
               </Button>
             </div>
           </Card>
-        </div>
+        </div> */}
       </main>
 
       {/* Footer */}
