@@ -2,7 +2,10 @@
 
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import { ArrowRight, Cloud, Sun, CloudRain } from "lucide-react"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { Label } from "@/components/ui/label"
+import { ArrowRight, Cloud, Sun, CloudRain, CreditCard, FileText, Calculator, ShoppingBag, Loader2, MessageSquare } from "lucide-react"
 import { useEffect, useState } from "react"
 
 // Helper function to calculate Easter date
@@ -128,6 +131,29 @@ export default function QRLandingPage() {
 
   const WeatherIcon = greeting.weatherIcon
 
+  // Contact form state
+  const [contact, setContact] = useState({
+    name: "",
+    email: "",
+    company: "",
+    message: "",
+  })
+  const [submitting, setSubmitting] = useState(false)
+  const [submitSuccess, setSubmitSuccess] = useState<string | null>(null)
+
+  const handleContactSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setSubmitSuccess(null)
+    setSubmitting(true)
+
+    // Simulate submission (replace with API call when backend is ready)
+    setTimeout(() => {
+      setSubmitting(false)
+      setSubmitSuccess("Thanks! We’ve received your message and will get back to you shortly.")
+      setContact({ name: "", email: "", company: "", message: "" })
+    }, 1000)
+  }
+
   return (
     <div className="min-h-screen bg-background">
       <main className="container mx-auto px-4 py-8 md:py-12">
@@ -202,6 +228,182 @@ export default function QRLandingPage() {
               </a>
             </div>
           </Card>
+        </div>
+
+        <div className="mt-16">
+          <h3 className="text-2xl md:text-3xl font-bold text-center">Core Features of Nuvia</h3>
+          <p className="text-muted-foreground text-center max-w-2xl mx-auto mt-2">
+            Built for African SMEs: accept payments, access financing, manage finances, and gain real-time insights.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
+            <Card className="p-6 transition-colors hover:border-primary/40">
+              <div className="flex items-center gap-3">
+                <CreditCard className="h-6 w-6 text-primary" />
+                <h4 className="text-lg font-semibold">Payments</h4>
+              </div>
+              <p className="text-muted-foreground mt-3">
+                Accept QR, mobile money, and card payments with automatic transaction tracking.
+              </p>
+            </Card>
+
+            <Card className="p-6 transition-colors hover:border-primary/40">
+              <div className="flex items-center gap-3">
+                <Calculator className="h-6 w-6 text-primary" />
+                <h4 className="text-lg font-semibold">Accounting</h4>
+              </div>
+              <p className="text-muted-foreground mt-3">
+                Automate bookkeeping, expense tracking, and reconciliation with clear ledgers.
+              </p>
+            </Card>
+
+            <Card className="p-6 transition-colors hover:border-primary/40">
+              <div className="flex items-center gap-3">
+                <FileText className="h-6 w-6 text-primary" />
+                <h4 className="text-lg font-semibold">Invoices</h4>
+              </div>
+              <p className="text-muted-foreground mt-3">
+                Create and send professional invoices and track payment status.
+              </p>
+            </Card>
+
+            <Card className="p-6 transition-colors hover:border-primary/40">
+              <div className="flex items-center gap-3">
+                <ShoppingBag className="h-6 w-6 text-primary" />
+                <h4 className="text-lg font-semibold">Store</h4>
+              </div>
+              <p className="text-muted-foreground mt-3">
+                Manage products, inventory, and sales from your in-app store.
+              </p>
+            </Card>
+          </div>
+        </div>
+
+        {/* Contact Section */}
+        <div className="mt-20 max-w-3xl mx-auto">
+          <Card className="p-8 space-y-6">
+            <div className="space-y-2 text-center">
+              <h3 className="text-2xl md:text-3xl font-bold">Contact Us</h3>
+              <p className="text-muted-foreground">Have questions or need support? Send us a message.</p>
+            </div>
+
+            {submitSuccess && (
+              <div className="rounded-md border border-green-600/30 bg-green-600/10 text-green-700 dark:text-green-300 px-4 py-3 text-sm">
+                {submitSuccess}
+              </div>
+            )}
+
+            <form className="space-y-6" onSubmit={handleContactSubmit}>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <Label htmlFor="name">Full Name</Label>
+                  <Input
+                    id="name"
+                    placeholder="Jane Doe"
+                    value={contact.name}
+                    onChange={(e) => setContact({ ...contact, name: e.target.value })}
+                    required
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="email">Email</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    placeholder="jane@business.co"
+                    value={contact.email}
+                    onChange={(e) => setContact({ ...contact, email: e.target.value })}
+                    required
+                  />
+                </div>
+
+                <div className="md:col-span-2 space-y-2">
+                  <Label htmlFor="company">Company (optional)</Label>
+                  <Input
+                    id="company"
+                    placeholder="Business Ltd."
+                    value={contact.company}
+                    onChange={(e) => setContact({ ...contact, company: e.target.value })}
+                  />
+                </div>
+
+                <div className="md:col-span-2 space-y-2">
+                  <Label htmlFor="message">Message</Label>
+                  <Textarea
+                    id="message"
+                    placeholder="Tell us how we can help..."
+                    value={contact.message}
+                    onChange={(e) => setContact({ ...contact, message: e.target.value })}
+                    required
+                    className="min-h-[140px]"
+                  />
+                </div>
+              </div>
+
+              <div className="flex justify-end">
+                <Button type="submit" size="lg" disabled={submitting}>
+                  {submitting ? (
+                    <span className="inline-flex items-center gap-2">
+                      <Loader2 className="h-4 w-4 animate-spin" /> Sending...
+                    </span>
+                  ) : (
+                    <span className="inline-flex items-center gap-2">
+                      <MessageSquare className="h-4 w-4" /> Send Message
+                    </span>
+                  )}
+                </Button>
+              </div>
+            </form>
+          </Card>
+        </div>
+
+        {/* Customer Feedback */}
+        <div className="mt-20">
+          <h3 className="text-2xl md:text-3xl font-bold text-center">What Our Customers Say</h3>
+          <p className="text-muted-foreground text-center max-w-2xl mx-auto mt-2">
+            Real stories from SMEs using Nuvia to run and grow their businesses.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+            <Card className="p-6">
+              <div className="space-y-3">
+                <p className="text-muted-foreground">“We switched to Nuvia for payments and invoicing, now reconciling at the end of day takes minutes.”</p>
+                <div className="flex items-center gap-3">
+                  <img src="/placeholder-user.jpg" alt="Customer" className="h-10 w-10 rounded-full object-cover" />
+                  <div>
+                    <div className="font-semibold">Amina K.</div>
+                    <div className="text-xs text-muted-foreground">Retail Store Owner, Dar es Salaam</div>
+                  </div>
+                </div>
+              </div>
+            </Card>
+
+            <Card className="p-6">
+              <div className="space-y-3">
+                <p className="text-muted-foreground">“Accounting used to be a headache. Nuvia’s reports give me a clear view of cash flow every week.”</p>
+                <div className="flex items-center gap-3">
+                  <img src="/placeholder-user.jpg" alt="Customer" className="h-10 w-10 rounded-full object-cover" />
+                  <div>
+                    <div className="font-semibold">Joseph M.</div>
+                    <div className="text-xs text-muted-foreground">Cafe Manager, Arusha</div>
+                  </div>
+                </div>
+              </div>
+            </Card>
+
+            <Card className="p-6">
+              <div className="space-y-3">
+                <p className="text-muted-foreground">“The in-app store helps us stay on top of inventory no more manual spreadsheets to track stock.”</p>
+                <div className="flex items-center gap-3">
+                  <img src="/placeholder-user.jpg" alt="Customer" className="h-10 w-10 rounded-full object-cover" />
+                  <div>
+                    <div className="font-semibold">Zawadi N.</div>
+                    <div className="text-xs text-muted-foreground">Boutique Owner, Mwanza</div>
+                  </div>
+                </div>
+              </div>
+            </Card>
+          </div>
         </div>
 
         {/* <div className="mt-16 max-w-2xl mx-auto">
