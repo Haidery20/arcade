@@ -310,7 +310,16 @@ export default function QRLandingPage() {
                   <Globe className="h-5 w-5 text-primary" />
                   <div>
                     <div className="font-medium">Website</div>
-                    <div className="text-muted-foreground">www.evmak.com</div>
+                    <div className="text-muted-foreground">
+                      <a 
+                        href="https://www.evmak.com" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-primary hover:underline"
+                      >
+                        www.evmak.com
+                      </a>
+                    </div>
                   </div>
                 </div>
                 
