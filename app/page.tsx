@@ -5,7 +5,7 @@ import { Card } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
-import { ArrowRight, Cloud, Sun, CloudRain, CreditCard, FileText, Calculator, ShoppingBag, Loader2, MessageSquare } from "lucide-react"
+import { ArrowRight, Cloud, Sun, CloudRain, CreditCard, FileText, Calculator, ShoppingBag, Phone, Mail, Globe, MapPin } from "lucide-react"
 import { useEffect, useState } from "react"
 
 // Helper function to calculate Easter date
@@ -162,7 +162,7 @@ export default function QRLandingPage() {
           <div className="flex items-center gap-3 text-muted-foreground">
             <WeatherIcon className="h-6 w-6" />
             <span className="text-lg font-medium">
-              {greeting.timeGreeting} {greeting.seasonEmoji}
+              {greeting.timeGreeting}
             </span>
           </div>
 
@@ -278,87 +278,57 @@ export default function QRLandingPage() {
           </div>
         </div>
 
-        {/* Contact Section */}
+        {/* Contact Details */}
         <div className="mt-20 max-w-3xl mx-auto">
           <Card className="p-8 space-y-6">
             <div className="space-y-2 text-center">
               <h3 className="text-2xl md:text-3xl font-bold">Contact Us</h3>
-              <p className="text-muted-foreground">Have questions or need support? Send us a message.</p>
+              <p className="text-muted-foreground">Get in touch with Evmak Tanzania</p>
             </div>
-
-            {submitSuccess && (
-              <div className="rounded-md border border-green-600/30 bg-green-600/10 text-green-700 dark:text-green-300 px-4 py-3 text-sm">
-                {submitSuccess}
-              </div>
-            )}
-
-            <form className="space-y-6" onSubmit={handleContactSubmit}>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <Label htmlFor="name">Full Name</Label>
-                  <Input
-                    id="name"
-                    placeholder="Jane Doe"
-                    value={contact.name}
-                    onChange={(e) => setContact({ ...contact, name: e.target.value })}
-                    required
-                  />
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <Phone className="h-5 w-5 text-primary" />
+                  <div>
+                    <div className="font-medium">Phone</div>
+                    <div className="text-muted-foreground">+255 716 400 001</div>
+                  </div>
                 </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="jane@business.co"
-                    value={contact.email}
-                    onChange={(e) => setContact({ ...contact, email: e.target.value })}
-                    required
-                  />
-                </div>
-
-                <div className="md:col-span-2 space-y-2">
-                  <Label htmlFor="company">Company (optional)</Label>
-                  <Input
-                    id="company"
-                    placeholder="Business Ltd."
-                    value={contact.company}
-                    onChange={(e) => setContact({ ...contact, company: e.target.value })}
-                  />
-                </div>
-
-                <div className="md:col-span-2 space-y-2">
-                  <Label htmlFor="message">Message</Label>
-                  <Textarea
-                    id="message"
-                    placeholder="Tell us how we can help..."
-                    value={contact.message}
-                    onChange={(e) => setContact({ ...contact, message: e.target.value })}
-                    required
-                    className="min-h-[140px]"
-                  />
+                
+                <div className="flex items-center gap-3">
+                  <Mail className="h-5 w-5 text-primary" />
+                  <div>
+                    <div className="font-medium">Email</div>
+                    <div className="text-muted-foreground">info@evmak.com</div>
+                  </div>
                 </div>
               </div>
-
-              <div className="flex justify-end">
-                <Button type="submit" size="lg" disabled={submitting}>
-                  {submitting ? (
-                    <span className="inline-flex items-center gap-2">
-                      <Loader2 className="h-4 w-4 animate-spin" /> Sending...
-                    </span>
-                  ) : (
-                    <span className="inline-flex items-center gap-2">
-                      <MessageSquare className="h-4 w-4" /> Send Message
-                    </span>
-                  )}
-                </Button>
+              
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <Globe className="h-5 w-5 text-primary" />
+                  <div>
+                    <div className="font-medium">Website</div>
+                    <div className="text-muted-foreground">www.evmak.com</div>
+                  </div>
+                </div>
+                
+                <div className="flex items-center gap-3">
+                  <MapPin className="h-5 w-5 text-primary" />
+                  <div>
+                    <div className="font-medium">Address</div>
+                    <div className="text-muted-foreground">Garden Avenue Tower 9th floor,</div>
+                    <div className="text-muted-foreground">Dar es Salaam, Tanzania</div>
+                  </div>
+                </div>
               </div>
-            </form>
+            </div>
           </Card>
         </div>
 
         {/* Customer Feedback */}
-        <div className="mt-20">
+        {/* <div className="mt-20">
           <h3 className="text-2xl md:text-3xl font-bold text-center">What Our Customers Say</h3>
           <p className="text-muted-foreground text-center max-w-2xl mx-auto mt-2">
             Real stories from SMEs using Nuvia to run and grow their businesses.
@@ -404,7 +374,7 @@ export default function QRLandingPage() {
               </div>
             </Card>
           </div>
-        </div>
+        </div> */}
 
         {/* <div className="mt-16 max-w-2xl mx-auto">
           <Card className="p-8 space-y-6 text-center bg-primary text-primary-foreground">
