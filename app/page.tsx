@@ -168,9 +168,7 @@ export default function QRLandingPage() {
 
           {/* Logo/Brand */}
           <div className="flex items-center gap-2">
-            <div className="w-24 flex items-center justify-center">
-              <img src="/evmak-logo.png" alt="EvMak Logo" className="w-32 h-24" />
-            </div>
+              <img src="https://evmak.com/wp-content/uploads/2024/01/logo_very-Big.png" alt="EvMak Logo" className="w-28 h-16" />
           </div>
 
           {/* Main Message */}
